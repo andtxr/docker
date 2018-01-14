@@ -1,0 +1,48 @@
+version: "3"
+
+services:
+
+  web:
+    image: nginx:latest
+    container_name: Nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./public:/public
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+
+  php:
+    image: php:7.2-fpm
+    container_name: PHP72
+    build:
+      context: ./build/php
+    volumes:
+      - ./public:/public
+
+  db:
+    image: mysql:5.7
+    container_name: MySql
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: app_default
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: PHPMyAdmin
+    ports:
+      - 8001:80
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: 12345
+      PHP_UPLOAD_MAX_FILESIZE: 1G
+      PHP_MAX_INPUT_VARS: 1G
+    restart: always
