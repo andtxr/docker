@@ -1,11 +1,10 @@
-FROM php:7.2-fpm
-RUN apt-get update & apt-get install -y \
-        libmcrypt-dev \
-        libxml2-dev \
-    && docker-php-ext-install pdo \
-    && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install mbstring \
+FROM php:7.2.2-fpm
+RUN apt-get update && apt-get install -y \
+    libxml2-dev \
+    libmcrypt-dev \
+    && pecl install xdebug-2.6.0 \
+    && pecl install mcrypt-1.0.1 \
+    && docker-php-ext-enable xdebug mcrypt \
+    && docker-php-ext-install pdo pdo_mysql \
     && docker-php-ext-install tokenizer \
-    && docker-php-ext-install openssl \
-    && docker-php-ext-install soap \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt \
+    && docker-php-ext-install soap
