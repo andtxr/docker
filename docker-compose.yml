@@ -7,17 +7,20 @@ services:
     container_name: Nginx
     ports:
       - 80:80
+    expose:
+      - 80
     volumes:
-      - ./public:/public
+      - ./public:/usr/share/nginx/html
       - ./site.conf:/etc/nginx/conf.d/site.conf
+      - ./logs:/var/log/nginx
 
   php:
-    image: php:7.2-fpm
+    image: php:7.2.2-fpm
     container_name: PHP72
     build:
       context: ./build/php
     volumes:
-      - ./public:/public
+      - ./public:/usr/share/nginx/html
 
   db:
     image: mysql:5.7
@@ -38,6 +41,8 @@ services:
     container_name: PHPMyAdmin
     ports:
       - 8001:80
+    expose:
+      - 8001
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: db
