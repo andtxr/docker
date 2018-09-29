@@ -2,52 +2,88 @@ version: "3"
 
 services:
 
-  web:
+  nginx:
     image: nginx:latest
-    container_name: Nginx
+    container_name: container_nginx
     ports:
       - 80:80
+      - 443:443
     expose:
       - 80
+      - 443
     volumes:
-      - ./public:/usr/share/nginx/html
-      - ./site.conf:/etc/nginx/conf.d/site.conf
-      - ./logs:/var/log/nginx
+      - ../:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
 
-  php:
-    image: php:7.2.2-fpm
-    container_name: PHP72
+  php-fpm:
+    image: php:7.2.10-fpm
+    container_name: container_php
     build:
-      context: ./build/php
+      context: ./php-fpm
     volumes:
-      - ./public:/usr/share/nginx/html
+      - ./php-fpm/php/php.ini:/usr/local/etc/php/php.ini
+      - ./php-fpm/logs:/usr/local/var/log
+      - ../:/usr/share/nginx/html
+    external_links:
+      - nginx:project.dev
+    environment:
+      PHP_UPLOAD_MAX_FILESIZE: 1G
+      PHP_MAX_INPUT_VARS: 1G
 
-  db:
+  memcached:
+    image: memcached
+    container_name: container_memcached
+    ports:
+      - 11211:11211
+    expose:
+      - 11211
+    links:
+      - memcached:memcached
+
+  redis:
+    image: redis
+    container_name: container_redis
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    links:
+      - redis:redis
+
+  mysql:
     image: mysql:5.7
-    container_name: MySql
+    container_name: container_mysql
     ports:
       - 3306:3306
     expose:
       - 3306
+    links:
+      - mysql:mysql
     volumes:
-      - ./data:/var/lib/mysql
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
     environment:
       MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: app_default
+      MYSQL_DATABASE: app
     restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: PHPMyAdmin
+    container_name: container_phpmyadmin
     ports:
       - 8001:80
     expose:
       - 8001
+    volumes:
+      - ./phpmyadmin/php-fpm.conf:/etc/php-fpm.conf
+      - ./phpmyadmin/nginx.conf:/etc/nginx.conf
+      - ./phpmyadmin/php.ini:/etc/php.ini
+      - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
     environment:
       PMA_ARBITRARY: 1
-      PMA_HOST: db
+      PMA_HOST: mysql
       PMA_USER: root
       PMA_PASSWORD: 12345
-      PHP_UPLOAD_MAX_FILESIZE: 1G
-      PHP_MAX_INPUT_VARS: 1G
     restart: always
