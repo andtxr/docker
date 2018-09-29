@@ -2,17 +2,20 @@ DOCKER
 ======
 
 * Nginx
-* PHP 7.2.2
+* PHP 7.2.10
 * MySQL 5.7
-* PHPMyAdmin
+* PhpMyAdmin
 
 PHP Extensions
 --------------
 
-* xdebug
-* mcrypt
-* tokenizer
+* json
+* xml
 * openssl
+* ctype
+* curl
+* xdebug
+* tokenizer
 * mbstring
 * pdo
 * pdo_mysql
@@ -25,7 +28,7 @@ Build
 docker-compose up
 ```
 
-NGINX
+Nginx
 -----
 
 * address: localhost
@@ -39,7 +42,7 @@ MySQL
 * username: root
 * password: 12345
 
-PHPMyAdmin
+PhpMyAdmin
 ----------
 
 * address: localhost
