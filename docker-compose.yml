@@ -17,7 +17,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/logs:/var/log/nginx
 
-  php-fpm:
+  php:
     image: php:7.2.10-fpm
     container_name: container_php
     build:
@@ -39,8 +39,6 @@ services:
       - 11211:11211
     expose:
       - 11211
-    links:
-      - memcached:memcached
 
   redis:
     image: redis
@@ -49,8 +47,6 @@ services:
       - 6379:6379
     expose:
       - 6379
-    links:
-      - redis:redis
 
   mysql:
     image: mysql:5.7
@@ -59,8 +55,6 @@ services:
       - 3306:3306
     expose:
       - 3306
-    links:
-      - mysql:mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
