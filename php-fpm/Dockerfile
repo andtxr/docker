@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install ctype \
     && docker-php-ext-install curl \
     && docker-php-ext-install json \
-    && docker-php-ext-enable xdebug pdo pdo_mysql tokenizer soap mbstring xml ctype curl json;
+    && docker-php-ext-enable xdebug zip pdo pdo_mysql tokenizer soap mbstring xml ctype curl json;
 
 RUN cd ~ \
     && curl -sS https://getcomposer.org/installer -o composer-setup.php \
