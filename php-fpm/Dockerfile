@@ -4,7 +4,9 @@ RUN apt-get update && apt-get install -y \
     git \
     libxml2-dev \
     libcurl4-openssl-dev \
+    zlib1g-dev \
     && pecl install xdebug-2.6.0 \
+    && docker-php-ext-install zip \
     && docker-php-ext-install pdo pdo_mysql \
     && docker-php-ext-install tokenizer \
     && docker-php-ext-install soap \
