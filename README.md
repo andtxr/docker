@@ -5,6 +5,8 @@ DOCKER
 * PHP 7.2.10
 * MySQL 5.7
 * PhpMyAdmin
+* Memcached
+* Redis
 
 PHP Extensions
 --------------
