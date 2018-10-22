@@ -20,6 +20,7 @@ PHP Extensions
 * pdo
 * pdo_mysql
 * soap
+* zip
 
 Build
 -----
