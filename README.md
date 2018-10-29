@@ -3,10 +3,13 @@ DOCKER
 
 * Nginx
 * PHP 7.2.10
-* MySQL 5.7
+* Composer
+* MySql 5.7
 * PhpMyAdmin
 * Memcached
 * Redis
+* Node
+* NPM
 
 PHP Extensions
 --------------
