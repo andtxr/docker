@@ -1,6 +1,7 @@
 FROM php:7.2.10-fpm
 
 RUN apt-get update && apt-get install -y \
+    gnupg \
     git \
     libxml2-dev \
     libcurl4-openssl-dev \
@@ -22,4 +23,4 @@ RUN cd ~ \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer;
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-    && apt install nodejs;
+    && apt -y install nodejs;
