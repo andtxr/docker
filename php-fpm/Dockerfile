@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libcurl4-openssl-dev \
     zlib1g-dev \
+    libpng-dev \
+    sendmail \
     && pecl install xdebug-2.6.0 \
     && docker-php-ext-install zip \
     && docker-php-ext-install pdo pdo_mysql \
@@ -16,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install ctype \
     && docker-php-ext-install curl \
     && docker-php-ext-install json \
+    && docker-php-ext-install gd \
     && docker-php-ext-enable xdebug zip pdo pdo_mysql tokenizer soap mbstring xml ctype curl json;
 
 RUN cd ~ \
