@@ -10,6 +10,7 @@ DOCKER
 * Redis
 * Node
 * NPM
+* Sendmail
 
 PHP Extensions
 --------------
@@ -26,6 +27,7 @@ PHP Extensions
 * pdo_mysql
 * soap
 * zip
+* gd
 
 Build
 -----
