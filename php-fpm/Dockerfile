@@ -63,20 +63,20 @@ RUN apt-get update \
 RUN docker-php-pecl-install \
 	redis-4.0.2 \
 	memcached-3.0.4 \
-    libsqlite3-dev
+	libsqlite3-dev
 
 # xdebug
 RUN pecl install xdebug-2.6.0 \
-    && docker-php-ext-enable xdebug
+	&& docker-php-ext-enable xdebug
 
 # composer
 RUN cd ~ \
-    && curl -sS https://getcomposer.org/installer -o composer-setup.php \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer;
+	&& curl -sS https://getcomposer.org/installer -o composer-setup.php \
+	&& php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # nodejs
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-    && apt-get -y install nodejs;
+	&& apt-get -y install nodejs
 
 # phpcs
 RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
@@ -86,13 +86,13 @@ RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar \
 	&& curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar \
 	&& chmod 755 phpcbf.phar \
 	&& mv phpcbf.phar /usr/local/bin/ \
-	&& ln -s /usr/local/bin/phpcbf.phar /usr/local/bin/phpcbf;
+	&& ln -s /usr/local/bin/phpcbf.phar /usr/local/bin/phpcbf
 
 # phpunit
 RUN curl -OL https://phar.phpunit.de/phpunit.phar \
 	&& chmod 755 phpunit.phar \
 	&& mv phpunit.phar /usr/local/bin/ \
-	&& ln -s /usr/local/bin/phpunit.phar /usr/local/bin/phpunit;
+	&& ln -s /usr/local/bin/phpunit.phar /usr/local/bin/phpunit
 
 # gulp
 RUN npm install -g gulp-cli
