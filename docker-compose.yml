@@ -18,7 +18,7 @@ services:
       - ./nginx/logs:/var/log/nginx
 
   php:
-    image: php:7.2.10-fpm
+    image: php:7.2.20-fpm
     container_name: container_php
     build:
       context: ./php-fpm
