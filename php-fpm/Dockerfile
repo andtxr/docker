@@ -2,7 +2,7 @@ FROM php:7.2.20-fpm
 
 # common
 RUN apt-get update -y \
-    && apt install -y \
+    && apt-get install -y \
     openssl \
     git \
     gnupg2 \
