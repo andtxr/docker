@@ -2,32 +2,34 @@ DOCKER
 ======
 
 * Nginx
-* PHP 7.2.10
+* PHP 7.2.20
+* PHP_CodeSniffer
+* PHPUnit
 * Composer
 * MySql 5.7
-* PhpMyAdmin
+* PHPMyAdmin
 * Memcached
 * Redis
-* Node
-* NPM
+* NodeJS
+  * Gulp
 * Sendmail
 
 PHP Extensions
 --------------
 
-* json
+* intl
 * xml
-* openssl
-* ctype
+* gd
 * curl
 * xdebug
-* tokenizer
 * mbstring
 * pdo
 * pdo_mysql
-* soap
+* sqlite
 * zip
-* gd
+* memcached
+* redis
+* xdebug
 
 Build
 -----
